@@ -21,7 +21,7 @@ const userSchema = mongoose.Schema({
         type: Array,
         default: [],
     },
-    savedPlainPassword: {
+    savedHashedPassword: {
         type: Array,
         default: [],
     }

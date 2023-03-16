@@ -1,10 +1,9 @@
 import express from "express";
-import { login, register } from "../control/auth";
-import { getPasswords, saveHashed, savePlain } from "../control/user";
+import { getPasswords, saveHashed, savePlain } from "../control/user.js";
 
 const userRoute = express.Router();
 
-userRoute.post('/:userId', getPasswords);
+userRoute.get('/:userId', getPasswords);
 userRoute.post('/:userId/savePlain', savePlain);
 userRoute.post('/:userId/saveHashed', saveHashed);
 

@@ -9,8 +9,8 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
 import mongooseBeautifier from "mongoose-beautiful-unique-validation"
-import authRoute from "./routes/auth";
-import userRoute from "./routes/user";
+import authRoute from "./routes/auth.js";
+import userRoute from "./routes/user.js";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -81,46 +81,3 @@ const conn = mongoose
 
     })
     .catch((error) => console.log(`${error} did not connect`));
-
-
-
-//   npm i bcrypt body-parser cors dotenv  express gridfs-stream helmet  jsonwebtoken mongoose morgan multer multer-gridfs-storage cookie-parser mongoose-beautiful-unique-validation
-
-// npm i yup redux-persist react-router-dom react-redux react-dropzone formik dotenv @reduxjs/toolkit @mui/material @mui/icons-material @emotion/styled @emotion/react
-
-/* STEPS NEXT :
-
-1. create a .env file under server / root directory 
-2. create 2 necessary variables namely PORT & MONGO_URL to locally store mongoDB url and development port
-3. create a public dir and assests sub-dir to store data
-4. add .gitignore file 
-5. paste the following in .env file
-6. run command (mkdir public/assets) in terminal under server dir 
-
-# Secret keys 
-DB_PASS = "xu3kKxLIhfxp9ftM"
-
-MONGO_URL = "mongodb+srv://admin:xu3kKxLIhfxp9ftM@social-pedia.z1og1dg.mongodb.net/?retryWrites=true&w=majority"
-
-PORT = 3000
-
-JWT_SECRET_KEY_256_BIT = "eUszVfxGuVvVXr69S5Di7UJrwRSVdBv1"
-JWT_SECRET_KEY_504_BIT = "o?%XZ1&N;Gup]isA+PuF6868-QurhXky^toZ8Ga8P,P!Z3'C^Lu42tfe%kW"
-JWT_SECRET_KEY_128_BIT = "c8oBO6qjBQ2Ni1aX99utif7WT8NA5smg"
-
-
-
-//cookie template
-res.cookie(`Cookie token name`,`encrypted cookie string Value`,{
-        maxAge: 5000,
-        // expires works the same as the maxAge
-        expires: new Date('01 12 2021'),
-        secure: true,
-        httpOnly: true,
-        sameSite: 'lax'
-    });
-
-
-*/
-
-
