@@ -1,4 +1,19 @@
+/* Google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Rubik&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+/* CSS RESET */
+html,
+body,
+#root .app {
+  height: 100%;
+  width: 100%;
+  font-family: 'Rubik', sans-serif, 'Dancing Script', cursive, 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  min-height: 100vh;
+}

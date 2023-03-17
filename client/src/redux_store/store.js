@@ -4,6 +4,7 @@ const initialState = {
     mode: "light",
     user: null,
     token: null,
+    pass: [{ url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' },]
 };
 
 export const authSlice = createSlice({

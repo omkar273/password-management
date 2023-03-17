@@ -1,3 +1,5 @@
+import { cyan, teal } from '@mui/material/colors';
+
 // color design tokens export
 export const colorTokens = {
     grey: {
@@ -39,11 +41,17 @@ export const themeSettings = (mode) => {
                     // palette values for dark mode
                     primary: {
                         dark: colorTokens.primary[200],
-                        main: colorTokens.primary[500],
+                        main: '#51ADAD',
                         light: colorTokens.primary[800],
                     },
                     neutral: {
                         dark: colorTokens.grey[100],
+                        main: colorTokens.grey[200],
+                        mediumMain: colorTokens.grey[300],
+                        medium: colorTokens.grey[400],
+                        light: colorTokens.grey[700],
+                    },
+                    secondary: {
                         main: colorTokens.grey[200],
                         mediumMain: colorTokens.grey[300],
                         medium: colorTokens.grey[400],
@@ -56,10 +64,10 @@ export const themeSettings = (mode) => {
                 }
                 : {
                     // palette values for light mode
-                    primary: {
-                        dark: colorTokens.primary[700],
-                        main: colorTokens.primary[500],
-                        light: colorTokens.primary[50],
+                    secondary: {
+                        dark: '#387979',
+                        main: '#51ADAD',
+                        light: '#A6DDDD',
                     },
                     neutral: {
                         dark: colorTokens.grey[700],
@@ -67,6 +75,12 @@ export const themeSettings = (mode) => {
                         mediumMain: colorTokens.grey[400],
                         medium: colorTokens.grey[300],
                         light: colorTokens.grey[50],
+                    },
+                    primary: {
+                        main: '#03404E',
+                        mediumMain: '#022c36',
+                        medium: '#00b8d4',
+                        light: '#356671',
                     },
                     background: {
                         default: colorTokens.grey[10],
