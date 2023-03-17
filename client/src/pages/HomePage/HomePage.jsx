@@ -26,8 +26,9 @@ const HomePage = () => {
             }
 
             console.log(`url : ${webURl}  pass : ${password}    http://localhost:5000/${user._id}/savePlain`);
-            const res = await axios.post(`http://localhost:5000/user/${user._id}/savePlain`)
+            const res = await axios.post(`http://localhost:5000/user/${user._id}/savePlain`, body)
             console.log(`${res}`);
+            alert('password saved')
         } catch (error) {
             console.log(`error in saving password : ${error}`);
 
