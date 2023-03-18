@@ -29,11 +29,11 @@ const SavedPassword = ({ isDataChanged }) => {
         <Box mt={'2.5rem'}>
             {plainSavedPassword.map((element) => {
                 console.log(`rendered frpm map  ${element.web_password}`)
-                return <DataRow element={element} />
+                return <DataRow pass={element.web_password} url={element.web_url} />
             })}
             {hashedSavedpassword.map((element) => {
                 console.log(`rendered frpm map  ${element.web_password}`)
-                return <DataRow element={element} />
+                return <DataRow url={element.web_url} pass={element.hashedPassword} />
             })}
         </Box>
     )
@@ -41,15 +41,15 @@ const SavedPassword = ({ isDataChanged }) => {
 
 export default SavedPassword;
 
-const DataRow = ({ element }) => {
+const DataRow = ({ url, pass }) => {
 
     return (
         <Box sx={{ backgroundColor: 'white', p: '0.75rem  1.5rem', mb: '0.25rem', mx: '15%', borderRadius: '0.5rem', display: 'flex', gap: "0.5rem", fontFamily: 'Play', fontSize: '1.25rem', }}>
             <Typography width={'60%'} sx={{}}>
-                {element.web_url}
+                {url}
             </Typography>
-            <Typography width={'40%'}>
-                {element.web_password}
+            <Typography width={'40%'} sx={{ overflowWrap: 'break-word' }}>
+                {pass}
             </Typography>
         </Box >
     )

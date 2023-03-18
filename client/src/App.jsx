@@ -8,6 +8,7 @@ import ErrorPage from '@/pages/ErrorPage/ErrorPage.jsx'
 import HomePage from '@/pages/HomePage/HomePage.jsx'
 import LoginPage from '@/pages/LoginPage/LoginPage.jsx'
 import SavedPassword from './pages/SavedPassword/SavedPassword.jsx'
+import SignUp from './pages/LoginPage/SignUp.jsx'
 
 const App = () => {
 
@@ -25,6 +26,7 @@ const App = () => {
             <Routes>
               <Route path='/' element={isAuth ? <Navigate to={'/home'} /> : < LoginPage />} />
               <Route path='/home' element={isAuth ? < HomePage /> : <Navigate to={'/'} />} />
+              <Route path='/register' element={isAuth ? < SignUp /> : <Navigate to={'/'} />} />
               <Route path='/saved' element={isAuth ? < SavedPassword /> : <Navigate to={'/'} />} />
 
               <Route path='*' element={<ErrorPage />} />

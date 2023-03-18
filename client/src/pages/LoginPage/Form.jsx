@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Grid, Box, Avatar, Button, FormControlLabel, TextField, Container, Checkbox, useTheme } from '@mui/material';
+import { Link, Grid, Box, Avatar, Button, FormControlLabel, TextField, Container, Checkbox, useTheme, InputBase } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
@@ -66,18 +66,22 @@ const Form = ({ pageType = 'login' }) => {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                        />
-                        <TextField
+                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }} >
+                        <Box>
+                            <InputBase
+                                sx={{ input: { color: 'whitesmoke' }, border: '1px solid white', borderRadius: '0.5rem', p: '0.5rem' }}
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="email"
+                                label="Email Address"
+                                name="email"
+                                autoComplete="email"
+                                autoFocus
+                            />
+                        </Box>
+                        <InputBase
+                            sx={{ input: { color: 'whitesmoke' }, border: '1px solid white', borderRadius: '0.5rem', p: '0.5rem' }}
                             margin="normal"
                             required
                             fullWidth

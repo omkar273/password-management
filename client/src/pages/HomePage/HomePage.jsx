@@ -82,7 +82,7 @@ const HomePage = () => {
                 <Box sx={{ width: '20%', backgroundColor: palette.secondary.dark, height: '100%', p: '1.5rem 0.5rem', minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'sticky', bottom: 0, top: 0, zIndex: 0 }}>
 
                 </Box>
-                <Box sx={{ width: '80%', backgroundColor: palette.secondary.light, height: '100%' }}>
+                <Box sx={{ width: '80%', backgroundColor: palette.secondary.light, height: '100%', pb: '2rem' }}>
 
                     <Box>
                         <Box sx={{ display: "flex", justifyContent: 'center', gap: '1rem', pt: '1.5rem' }}>
