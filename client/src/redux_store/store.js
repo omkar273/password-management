@@ -4,7 +4,8 @@ const initialState = {
     mode: "light",
     user: null,
     token: null,
-    pass: [{ url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' }, { url: 'google', pass: 'dummy' },]
+    plainPass: [],
+    hashedPass: [],
 };
 
 export const authSlice = createSlice({
@@ -21,7 +22,15 @@ export const authSlice = createSlice({
         setLogout: (state) => {
             state.user = null;
             state.token = null;
+            state.plainPass = [];
+            state.hashedPass = [];
         },
+        setPlainPassword: (state, action) => {
+            state.plainPass = action.payload.savedPlainPassword;
+        },
+        setHashedPassword: (state, action) => {
+            state.hashedPass = action.payload.savedHashedPassword;
+        }
     },
 });
 

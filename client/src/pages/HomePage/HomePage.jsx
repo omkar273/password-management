@@ -1,167 +1,149 @@
-import UniversalNavbar from '@/ui/components/UniversalNavbar';
-import { Box, Input, InputBase, Typography, useTheme } from '@mui/material'
+import UniversalNavbar from '@/ui/components/UniversalNavbar'
+import { Email } from '@mui/icons-material';
+import { Box, TextField, Typography, useTheme } from '@mui/material'
 import axios from 'axios';
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
+import SavedPassword from '../SavedPassword/SavedPassword';
 
 const HomePage = () => {
-    const user = useSelector((state) => state.user);
+
+    const user = useSelector((s) => s.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const fullname = (user.name);
     const { palette } = useTheme();
 
-
-    const [webURl, setwebURl] = useState("");
+    const [isDataChanged, setisDataChanged] = useState(false)
+    const [webUrl, setwebUrl] = useState("")
     const [password, setpassword] = useState("")
 
-
-    const addPassPlain = async () => {
+    const addPlainPassword = async () => {
+        console.log(`add plain password called`);
         try {
+
+            if (webUrl.length == 0 || password == 0) {
+                alert('please enter the data in field');
+                return
+            }
+
             const body = {
                 "id": user._id,
-                "web_url": webURl,
+                "web_url": webUrl,
                 "web_password": password
             }
 
-            console.log(`url : ${webURl}  pass : ${password}    http://localhost:5000/${user._id}/savePlain`);
-            const res = await axios.post(`http://localhost:5000/user/${user._id}/savePlain`, body)
-            console.log(`${res}`);
-            alert('password saved')
-        } catch (error) {
-            console.log(`error in saving password : ${error}`);
+            const server_url = `http://localhost:5000/user/${user._id}/savePlain`
 
+            const res = await axios.post(server_url, body);
+            const resJson = await res.data;
+            setisDataChanged(!isDataChanged)
+
+        } catch (error) {
+            console.log(`error in loggin : ${error}`);
         }
     }
-    const addPassHashed = async () => {
+    const addHashedPassword = async (saveType = 'plain') => {
+        console.log(`add hashed password called`);
         try {
+            if (webUrl.length == 0 || password == 0) {
+                alert('please enter the data in field');
+                return
+            }
+
             const body = {
                 "id": user._id,
-                "web_url": webURl,
+                "web_url": webUrl,
                 "web_password": password
             }
 
-            console.log(`url : ${webURl}  pass : ${password}    http://localhost:5000/${user._id}/savePlain`);
-            const res = await axios.post(`http://localhost:5000/user/${user._id}/saveHashed`, body)
-            console.log(`${res}`);
-            alert('password saved')
-        } catch (error) {
-            console.log(`error in saving password : ${error}`);
+            const server_url = `http://localhost:5000/user/${user._id}/saveHashed`
 
+            const res = await axios.post(server_url, body);
+            const resJson = await res.data;
+            setisDataChanged(!isDataChanged)
+        } catch (error) {
+            console.log(`error in loggin : ${error}`);
         }
     }
+
+
+
 
     return (
-        <Box sx={{ minHeight: '100vh' }}>
-            <UniversalNavbar userName={fullname} />
+        < Box sx={{
+            display: 'block', flexFlow: 'column nowrap', flexGrow: 1
+        }}>
 
-            <Box sx={{ display: 'flex', height: '100%', flexGrow: 1 }}>
+            <Box sx={{ position: 'sticky', top: 0, zIndex: "150" }}>
+                <UniversalNavbar userName={user.name} />
+            </Box>
+            <Box sx={{ display: 'flex', width: '100%', backgroundColor: palette.secondary.light }} >
+                <Box sx={{ width: '20%', backgroundColor: palette.secondary.dark, height: '100%', p: '1.5rem 0.5rem', minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'sticky', bottom: 0, top: 0, zIndex: 0 }}>
 
-
-                <Box sx={{ width: '20%', height: '90vh', backgroundColor: '#255252', display: 'flex', pt: '3rem' }}>
                 </Box>
-                <Box sx={{ flexGrow: 1, height: '90vh', backgroundColor: '#A6DDDD', display: 'flex', justifyContent: 'center', pt: '2rem', flexDirection: 'column' }}>
-                    <Box display={'flex'} sx={{ gap: '1rem', alignItems: 'center', pl: '5rem' }}>
-                        <Input
-                            placeholder='Enter the url'
-                            sx={{
-                                backgroundColor: 'whitesmoke',
-                                height: '2rem',
-                                p: '1.25rem '
-                            }} onChange={(e) => {
-                                setwebURl(e.target.value)
-                                console.log(`${webURl}`);
-                            }}>
-                        </Input>
+                <Box sx={{ width: '80%', backgroundColor: palette.secondary.light, height: '100%' }}>
 
-                        <Input
-                            placeholder='Password to save'
-                            sx={{
-                                backgroundColor: 'whitesmoke',
-                                height: '2rem',
-                                p: '1.25rem '
-                            }}
-                            onChange={(e) => setpassword(e.target.value)}>
+                    <Box>
+                        <Box sx={{ display: "flex", justifyContent: 'center', gap: '1rem', pt: '1.5rem' }}>
 
-                        </Input>
+                            <TextField
+                                label="Web URl"
+                                sx={{ width: '40%' }}
+                                onChange={(e) => setwebUrl(e.target.value)}
+                            />
+                            <TextField
+                                label="Password"
+                                sx={{ width: '40%' }}
+                                onChange={(e) => setpassword(e.target.value)}
+                            />
+
+                        </Box>
                         <Box
-                            onClick={() => addPassPlain()}
-                            sx={{
-                                display: 'flex',
-                                gap: '0.75rem',
-                                alignItems: 'center ',
-                                backgroundColor: palette.primary.light,
-                                padding: '0.5rem',
-                                borderRadius: '0.5rem',
-                                px: '1rem',
-                                height: '3rem'
-                            }}>
+                            sx={{ display: "flex", flexFlow: "column w", justifyContent: 'center', gap: '1rem', pt: '0.5rem' }}>
 
                             <Typography
+                                onClick={() => addPlainPassword()}
                                 sx={{
+                                    display: 'inline-block',
                                     cursor: 'pointer',
                                     fontFamily: 'Play',
                                     fontSize: 'clamp(1rem ,1rem,1.5rem)',
-                                    color: 'whitesmoke'
+                                    color: palette.primary.contrastText,
+                                    backgroundColor: palette.primary.light,
+                                    padding: '0.5rem',
+                                    borderRadius: '0.5rem',
+                                    px: '1rem',
+
                                 }}>
                                 Add Plain password
                             </Typography>
-                        </Box>
-
-                        <Box
-                            onClick={() => addPassHashed()}
-                            sx={{
-                                display: 'flex',
-                                gap: '0.75rem',
-                                alignItems: 'center ',
-                                backgroundColor: palette.primary.light,
-                                padding: '0.5rem',
-                                borderRadius: '0.5rem',
-                                px: '1rem',
-                                height: '3rem'
-                            }}>
 
                             <Typography
+                                onClick={() => addHashedPassword('hashed')}
                                 sx={{
+                                    display: 'inline-block',
                                     cursor: 'pointer',
                                     fontFamily: 'Play',
                                     fontSize: 'clamp(1rem ,1rem,1.5rem)',
-                                    color: 'whitesmoke'
+                                    color: palette.primary.contrastText,
+                                    backgroundColor: palette.primary.light,
+                                    padding: '0.5rem',
+                                    borderRadius: '0.5rem',
+                                    px: '1rem',
+
                                 }}>
                                 Add Hashed password
                             </Typography>
-                        </Box>
 
-                        <Box
-                            onClick={() => dispatch(navigate('/saved'))}
-                            sx={{
-                                display: 'flex',
-                                gap: '0.75rem',
-                                alignItems: 'center ',
-                                backgroundColor: palette.primary.light,
-                                padding: '0.5rem',
-                                borderRadius: '0.5rem',
-                                px: '1rem',
-                                height: '3rem'
-                            }}>
-
-                            <Typography
-                                sx={{
-                                    cursor: 'pointer',
-                                    fontFamily: 'Play',
-                                    fontSize: 'clamp(1rem ,1rem,1.5rem)',
-                                    color: 'whitesmoke'
-                                }}>
-                                See all Password
-                            </Typography>
                         </Box>
                     </Box>
+
+                    <SavedPassword isDataChanged={isDataChanged} />
                 </Box>
             </Box>
-        </Box >
+        </ Box >
     )
 }
 
 export default HomePage
-
