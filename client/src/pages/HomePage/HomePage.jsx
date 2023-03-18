@@ -17,7 +17,7 @@ const HomePage = () => {
     const [password, setpassword] = useState("")
 
 
-    const addPass = async () => {
+    const addPassPlain = async () => {
         try {
             const body = {
                 "id": user._id,
@@ -27,6 +27,23 @@ const HomePage = () => {
 
             console.log(`url : ${webURl}  pass : ${password}    http://localhost:5000/${user._id}/savePlain`);
             const res = await axios.post(`http://localhost:5000/user/${user._id}/savePlain`, body)
+            console.log(`${res}`);
+            alert('password saved')
+        } catch (error) {
+            console.log(`error in saving password : ${error}`);
+
+        }
+    }
+    const addPassHashed = async () => {
+        try {
+            const body = {
+                "id": user._id,
+                "web_url": webURl,
+                "web_password": password
+            }
+
+            console.log(`url : ${webURl}  pass : ${password}    http://localhost:5000/${user._id}/savePlain`);
+            const res = await axios.post(`http://localhost:5000/user/${user._id}/saveHashed`, body)
             console.log(`${res}`);
             alert('password saved')
         } catch (error) {
@@ -69,7 +86,7 @@ const HomePage = () => {
 
                         </Input>
                         <Box
-                            onClick={() => addPass()}
+                            onClick={() => addPassPlain()}
                             sx={{
                                 display: 'flex',
                                 gap: '0.75rem',
@@ -88,9 +105,34 @@ const HomePage = () => {
                                     fontSize: 'clamp(1rem ,1rem,1.5rem)',
                                     color: 'whitesmoke'
                                 }}>
-                                Add password
+                                Add Plain password
                             </Typography>
                         </Box>
+
+                        <Box
+                            onClick={() => addPassHashed()}
+                            sx={{
+                                display: 'flex',
+                                gap: '0.75rem',
+                                alignItems: 'center ',
+                                backgroundColor: palette.primary.light,
+                                padding: '0.5rem',
+                                borderRadius: '0.5rem',
+                                px: '1rem',
+                                height: '3rem'
+                            }}>
+
+                            <Typography
+                                sx={{
+                                    cursor: 'pointer',
+                                    fontFamily: 'Play',
+                                    fontSize: 'clamp(1rem ,1rem,1.5rem)',
+                                    color: 'whitesmoke'
+                                }}>
+                                Add Hashed password
+                            </Typography>
+                        </Box>
+
                         <Box
                             onClick={() => dispatch(navigate('/saved'))}
                             sx={{
